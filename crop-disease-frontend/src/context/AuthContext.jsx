@@ -51,8 +51,8 @@ export function AuthProvider({ children }) {
         return me.data;
     };
 
-    const signup = async (email, password, fullName) => {
-        await api.post('/auth/signup', { email, password, fullName });
+    const signup = async (email, password, fullName, role, adminSecret) => {
+        await api.post('/auth/signup', { email, password, fullName, role, adminSecret });
     };
 
     const logout = () => {

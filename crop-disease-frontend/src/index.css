@@ -1,21 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-agri-dark: #0F1A14;
+  --color-agri-surface: #1A2820;
+  --color-agri-border: #2A3D30;
+  --color-agri-green: #2F8F5B;
+  --color-agri-amber: #E4B363;
+  --color-agri-red: #B33A3A;
+  --color-agri-text: #EAEFEA;
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-sans: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+
+  --animate-fade-in: fadeIn 0.5s ease-out;
+  --animate-slide-up: slideUp 0.4s ease-out;
+  --animate-pulse-green: pulseGreen 2s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(47,143,91,0.4); }
+    50% { box-shadow: 0 0 0 8px rgba(47,143,91,0); }
+  }
+}
 
 /* ═══════════════════════════════════════
    AGRI-TECH INTELLIGENCE CONSOLE
    Global Design System
 ═══════════════════════════════════════ */
-
-:root {
-    --agri-dark: #0F1A14;
-    --agri-surface: #1A2820;
-    --agri-border: #2A3D30;
-    --agri-green: #2F8F5B;
-    --agri-amber: #E4B363;
-    --agri-red: #B33A3A;
-    --agri-text: #EAEFEA;
-}
 
 * {
     box-sizing: border-box;
@@ -30,9 +49,9 @@ body,
 }
 
 body {
-    background-color: var(--agri-dark);
-    color: var(--agri-text);
-    font-family: 'IBM Plex Sans', sans-serif;
+    background-color: var(--color-agri-dark);
+    color: var(--color-agri-text);
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 }
@@ -104,19 +123,19 @@ body {
     }
 
     .badge-green {
-        @apply badge bg-agri-green/10 text-agri-green border-agri-green/30;
+        @apply bg-agri-green/10 text-agri-green border-agri-green/30;
     }
 
     .badge-red {
-        @apply badge bg-agri-red/10 text-agri-red border-agri-red/30;
+        @apply bg-agri-red/10 text-agri-red border-agri-red/30;
     }
 
     .badge-amber {
-        @apply badge bg-agri-amber/10 text-agri-amber border-agri-amber/30;
+        @apply bg-agri-amber/10 text-agri-amber border-agri-amber/30;
     }
 
     .badge-grey {
-        @apply badge bg-agri-text/5 text-agri-text/50 border-agri-border;
+        @apply bg-agri-text/5 text-agri-text/50 border-agri-border;
     }
 
     /* ═══ TABLES ═══ */

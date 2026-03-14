@@ -5,7 +5,8 @@ import com.cropdisease.crop_disease_backend.repository.UserRepository;
 import com.cropdisease.crop_disease_backend.security.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,20 @@ public class AuthController {
             return ResponseEntity.badRequest().body("Email already in use");
         }
 
+        User.Role assignedRole = User.Role.USER;
+        if ("ADMIN".equalsIgnoreCase(request.get("role"))) {
+            if ("admin123".equals(request.get("adminSecret"))) {
+                assignedRole = User.Role.ADMIN;
+            } else {
+                return ResponseEntity.badRequest().body("Invalid Admin Secret Key");
+            }
+        }
+
         User user = User.builder()
                 .email(request.get("email"))
                 .password(passwordEncoder.encode(request.get("password")))
                 .fullName(request.get("fullName"))
-                .role(User.Role.USER)
+                .role(assignedRole)
                 .build();
 
         userRepository.save(user);
